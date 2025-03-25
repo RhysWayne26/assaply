@@ -9,4 +9,3 @@ val pages = listOf(
     Page("Welcome", "to Assaply", image = R.drawable.welcum),
     Page("Only relevant", "hi-tech and politics news. Enjoy!", R.drawable.nightcity)
 )
-//optimized

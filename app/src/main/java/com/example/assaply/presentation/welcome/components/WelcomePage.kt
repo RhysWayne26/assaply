@@ -51,5 +51,5 @@ fun WelcomePage(page: Page, modifier: Modifier = Modifier) {
             color = colorResource(R.color.text_medium)
         )
     }
+
 }
-//optimized
