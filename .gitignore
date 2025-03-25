@@ -10,9 +10,6 @@
 local.properties
 /build/
 /.gradle/
-/gradlew
-/gradlew.bat
-/gradle/wrapper/
 /.idea/
 *.iml
 /app/src/androidTest/
