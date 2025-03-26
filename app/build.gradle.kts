@@ -63,4 +63,10 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     implementation(libs.accompanist.systemuicontroller)
     kapt(libs.hilt.compiler)
+    implementation(libs.retrofit)
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.converter.gson)
+    implementation(libs.coil.compose)
+    implementation(libs.androidx.paging.compose)
+
 }
