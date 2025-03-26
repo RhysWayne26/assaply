@@ -16,6 +16,7 @@ class WelcomeViewModel @Inject constructor(
             is WelcomeEvent.SaveAppEntry->{
                 saveAppEntry()
             }
+            else->return
         }
     }
     private fun saveAppEntry(){

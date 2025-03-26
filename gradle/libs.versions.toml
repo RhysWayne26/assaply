@@ -1,6 +1,7 @@
 [versions]
 accompanistSystemuicontroller = "0.34.0"
 coilCompose = "2.4.0"
+constraintlayoutCompose = "1.1.1"
 converterGson = "2.9.0"
 hilt = "2.51"
 agp = "8.9.1"
@@ -21,6 +22,7 @@ pagingCommonJvm = "3.3.6"
 
 [libraries]
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
+androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayoutCompose" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }

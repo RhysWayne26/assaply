@@ -1,5 +1,6 @@
 package com.example.assaply.presentation.home
 
+import android.R
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -16,9 +17,14 @@ import com.example.assaply.presentation.Dimensions.MediumPadding1
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Text
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.assaply.presentation.common.ArticleCard
 import com.example.assaply.presentation.common.ArticlesList
 import com.example.assaply.presentation.common.SearchBar
 import com.example.assaply.presentation.navgraph.Route
+import com.example.assaply.presentation.welcome.WelcomeScreen
 
 @Composable
 fun HomeScreen(
@@ -44,7 +50,7 @@ fun HomeScreen(
             .statusBarsPadding()
     ) {
         Image(
-            painter = painterResource(id = android.R.drawable.ic_menu_gallery),
+            painter = painterResource(id = R.drawable.ic_menu_gallery),
             contentDescription = null,
             modifier = Modifier.padding(horizontal = MediumPadding1)
         )
@@ -72,3 +78,47 @@ fun HomeScreen(
         )
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+fun HomeScreenPreview() {
+    val mockArticles = listOf(
+        Article(
+            title = "Breaking News 1",
+            content = "Content 1",
+            author = "Author A",
+            description = "Short description 1",
+            publishedAt = "2025-03-26T12:00:00Z",
+            source = com.example.assaply.data.domain.model.Source("1", "Mock Source"),
+            url = "https://example.com/news1",
+            urlToImage = ""
+        ),
+        Article(
+            title = "Breaking News 2",
+            content = "Content 2",
+            author = "Author B",
+            description = "Short description 2",
+            publishedAt = "2025-03-25T10:30:00Z",
+            source = com.example.assaply.data.domain.model.Source("2", "Mock Source 2"),
+            url = "https://example.com/news2",
+            urlToImage = ""
+        )
+    )
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(text = "Превью карточек статей:")
+        Spacer(modifier = Modifier.height(8.dp))
+
+        mockArticles.forEach { article ->
+            ArticleCard(
+                article = article,
+                onClick = {}
+            )
+        }
+    }
+}
+

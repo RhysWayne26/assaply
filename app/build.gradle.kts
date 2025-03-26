@@ -68,5 +68,6 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.coil.compose)
     implementation(libs.androidx.paging.compose)
+    implementation(libs.androidx.constraintlayout.compose)
 
 }
