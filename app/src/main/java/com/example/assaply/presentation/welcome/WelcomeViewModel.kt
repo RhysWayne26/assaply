@@ -2,7 +2,7 @@ package com.example.assaply.presentation.welcome
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.assaply.data.domain.usecases.AppEntryUsecases
+import com.example.assaply.data.domain.usecases.app_entry.AppEntryUsecases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,6 +16,7 @@ class WelcomeViewModel @Inject constructor(
             is WelcomeEvent.SaveAppEntry->{
                 saveAppEntry()
             }
+            else->return
         }
     }
     private fun saveAppEntry(){
