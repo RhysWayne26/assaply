@@ -1,30 +1,30 @@
 package com.example.assaply.presentation.home
 
+//noinspection SuspiciousImport
 import android.R
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.runtime.getValue
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import com.example.assaply.data.domain.model.Article
 import com.example.assaply.presentation.Dimensions.MediumPadding1
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Text
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.assaply.presentation.common.ArticleCard
 import com.example.assaply.presentation.common.ArticlesList
 import com.example.assaply.presentation.common.SearchBar
 import com.example.assaply.presentation.navgraph.Route
-import com.example.assaply.presentation.welcome.WelcomeScreen
 
 @Composable
 fun HomeScreen(
@@ -71,7 +71,7 @@ fun HomeScreen(
 
         ArticlesList(
             modifier = Modifier.padding(horizontal = MediumPadding1),
-            articles = articles,
+            articles = articles.itemSnapshotList.items,
             onClick = {
                 navigate(Route.DetailsScreen.route)
             }

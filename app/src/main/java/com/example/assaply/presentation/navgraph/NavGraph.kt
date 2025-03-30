@@ -1,15 +1,13 @@
 package com.example.assaply.presentation.navgraph
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import androidx.paging.compose.collectAsLazyPagingItems
-import com.example.assaply.presentation.home.HomeScreen
+import com.example.assaply.presentation.bookmark.BookmarkScreen
+import com.example.assaply.presentation.bookmark.BookmarkViewModel
 import com.example.assaply.presentation.home.HomeViewModel
 import com.example.assaply.presentation.welcome.WelcomeScreen
 import com.example.assaply.presentation.welcome.WelcomeViewModel
@@ -37,8 +35,16 @@ fun NavGraph(startDestination: String){
         ){
             composable(route=Route.NewsNavScreen.route){
                 val viewModel: HomeViewModel = hiltViewModel()
-                val articles = viewModel.news.collectAsLazyPagingItems()
-                HomeScreen(articles = articles, navigate = {})
+
+            }
+        }
+        navigation(
+            route = Route.NewsNav.route,
+            startDestination = Route.NewsNavScreen.route
+        ){
+            composable(route=Route.NewsNavScreen.route){
+                val viewModel: BookmarkViewModel = hiltViewModel()
+                BookmarkScreen(state = viewModel.state.value, navigate = {})
             }
         }
     }

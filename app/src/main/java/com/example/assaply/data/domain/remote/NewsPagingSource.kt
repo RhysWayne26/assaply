@@ -6,7 +6,8 @@ import com.example.assaply.data.domain.model.Article
 
 class NewsPagingSource(
     private val newsApi: NewsApi,
-    private val sources: String
+    private val sources: String,
+    private val searchQuery: String? = null
 ): PagingSource<Int, Article>() {
 
     private var totalNewsCount =0
