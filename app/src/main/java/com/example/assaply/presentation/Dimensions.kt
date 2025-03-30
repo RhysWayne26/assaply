@@ -12,4 +12,5 @@ object Dimensions {
     val ArticleCardSize = 96.dp
     val ExtraSmallPadding = 3.dp
     val ExtraSmallPadding2 = 6.dp
+    val ArticleImageHeight = 256.dp
 }

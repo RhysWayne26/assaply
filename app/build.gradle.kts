@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
     id("kotlin-kapt")
 }
 
@@ -69,5 +70,8 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.androidx.paging.compose)
     implementation(libs.androidx.constraintlayout.compose)
-
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.paging)
 }
