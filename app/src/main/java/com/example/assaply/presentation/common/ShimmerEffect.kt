@@ -30,10 +30,10 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.assaply.R
-import com.example.assaply.presentation.Dimensions.ArticleCardSize
-import com.example.assaply.presentation.Dimensions.ExtraSmallPadding
-import com.example.assaply.presentation.Dimensions.ExtraSmallPadding2
-import com.example.assaply.presentation.Dimensions.SmallIconSize
+import com.example.assaply.util.Dimensions.ArticleCardSize
+import com.example.assaply.util.Dimensions.ExtraSmallPadding
+import com.example.assaply.util.Dimensions.ExtraSmallPadding2
+import com.example.assaply.util.Dimensions.SmallIconSize
 import com.example.assaply.ui.theme.AssaplyTheme
 
 @SuppressLint("UnnecessaryComposedModifier")

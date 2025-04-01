@@ -1,15 +1,14 @@
 package com.example.assaply.presentation.common
 
-import com.example.assaply.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -28,12 +27,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.assaply.data.domain.model.Article
-import com.example.assaply.data.domain.model.Source
-import com.example.assaply.presentation.Dimensions.ArticleCardSize
-import com.example.assaply.presentation.Dimensions.ExtraSmallPadding
-import com.example.assaply.presentation.Dimensions.ExtraSmallPadding2
-import com.example.assaply.presentation.Dimensions.SmallIconSize
+import com.example.assaply.R
+import com.example.assaply.data.domain.entities.Article
+import com.example.assaply.data.domain.entities.Source
+import com.example.assaply.util.Dimensions.ArticleCardSize
+import com.example.assaply.util.Dimensions.ExtraSmallPadding
+import com.example.assaply.util.Dimensions.ExtraSmallPadding2
+import com.example.assaply.util.Dimensions.SmallIconSize
 import com.example.assaply.ui.theme.AssaplyTheme
 
 @Composable
@@ -79,7 +79,7 @@ fun ArticleCard(
             verticalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
                 .height(ArticleCardSize)
-                .weight(1f) // ВАЖНО!
+                .weight(1f)
         ) {
             Text(
                 text = article.title,
@@ -103,7 +103,7 @@ fun ArticleCard(
                 )
                 Spacer(modifier = Modifier.width(ExtraSmallPadding2))
                 Text(
-                    text = article.publishedAt,
+                    text = formatPublishedAt(article.publishedAt),
                     style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
                     color = colorResource(id = R.color.body)
                 )

@@ -3,27 +3,33 @@ package com.example.assaply.presentation.common
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.AssistChipDefaults.IconSize
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.assaply.R
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.assaply.ui.theme.AssaplyTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(
     modifier: Modifier = Modifier,
@@ -42,22 +48,37 @@ fun SearchBar(
 
     Box(modifier = modifier) {
         TextField(
+            value = text,
+            onValueChange = onValueChange,
             modifier = Modifier
                 .fillMaxWidth()
                 .searchBarBorder(),
-            value = text,
-            onValueChange = onValueChange,
-            readOnly = readOnly,
             leadingIcon = {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_search),
                     contentDescription = null,
-                    modifier = Modifier.size(IconSize),
+                    modifier = Modifier.size(24.dp),
                     tint = colorResource(id = R.color.body)
                 )
             },
+            placeholder = {
+                Text("Search...", style = MaterialTheme.typography.bodyMedium)
+            },
+            textStyle = MaterialTheme.typography.bodyMedium.copy(
+                color = MaterialTheme.colorScheme.onBackground
+            ),
             singleLine = true,
-            shape = MaterialTheme.shapes.medium
+            readOnly = readOnly,
+            shape = MaterialTheme.shapes.medium,
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Search
+            ),
+            keyboardActions = KeyboardActions(
+                onSearch = { onSearch() }
+            ),
+            colors = TextFieldDefaults.textFieldColors(
+                containerColor = MaterialTheme.colorScheme.surface
+            )
         )
     }
 }

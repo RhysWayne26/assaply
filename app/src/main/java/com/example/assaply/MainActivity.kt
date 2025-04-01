@@ -14,10 +14,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
-import com.example.assaply.data.domain.model.Article
-import com.example.assaply.data.domain.model.Source
-import com.example.assaply.data.local.NewsDao
-import com.example.assaply.presentation.navgraph.NavGraph
+import com.example.assaply.data.domain.entities.Article
+
+import com.example.assaply.data.domain.entities.Source
+import com.example.assaply.data.room.NewsDao
+import com.example.assaply.presentation.navigation.NavGraph
 import com.example.assaply.ui.theme.AssaplyTheme
 import dagger.hilt.android.AndroidEntryPoint
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
