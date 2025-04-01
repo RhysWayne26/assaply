@@ -8,9 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.example.assaply.data.domain.model.Article
-import com.example.assaply.presentation.Dimensions.ExtraSmallPadding2
-import com.example.assaply.presentation.Dimensions.MediumPadding1
+import com.example.assaply.data.domain.entities.Article
+
+import com.example.assaply.util.Dimensions.ExtraSmallPadding2
+import com.example.assaply.util.Dimensions.MediumPadding1
 import com.example.assaply.presentation.common.ArticleCard
 import com.example.assaply.presentation.common.ArticleCardShimmerEffect
 import com.example.assaply.presentation.common.EmptyScreen

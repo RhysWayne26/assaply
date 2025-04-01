@@ -28,12 +28,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.assaply.R
-import com.example.assaply.data.domain.model.Article
-import com.example.assaply.data.domain.model.Source
-import com.example.assaply.presentation.Dimensions.ArticleCardSize
-import com.example.assaply.presentation.Dimensions.ExtraSmallPadding
-import com.example.assaply.presentation.Dimensions.ExtraSmallPadding2
-import com.example.assaply.presentation.Dimensions.SmallIconSize
+import com.example.assaply.data.domain.entities.Article
+import com.example.assaply.data.domain.entities.Source
+import com.example.assaply.util.Dimensions.ArticleCardSize
+import com.example.assaply.util.Dimensions.ExtraSmallPadding
+import com.example.assaply.util.Dimensions.ExtraSmallPadding2
+import com.example.assaply.util.Dimensions.SmallIconSize
 import com.example.assaply.ui.theme.AssaplyTheme
 
 @Composable
