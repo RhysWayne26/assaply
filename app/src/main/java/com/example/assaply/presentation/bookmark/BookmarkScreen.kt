@@ -13,14 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import com.example.assaply.R
+import com.example.assaply.data.domain.model.Article
 import com.example.assaply.presentation.Dimensions.MediumPadding1
 import com.example.assaply.presentation.common.ArticlesList
-import com.example.assaply.presentation.navgraph.Route
 
 @Composable
 fun BookmarkScreen(
     state: BookmarkState,
-    navigate:(String)->Unit
+    navigateToDetails:(Article)->Unit
 ){
     Column(
         modifier = Modifier
@@ -37,6 +37,6 @@ fun BookmarkScreen(
         Spacer(
             modifier = Modifier.height(MediumPadding1)
         )
-        ArticlesList(articles = state.articles, onClick = {navigate(Route.DetailsScreen.route)})
+        ArticlesList(articles = state.articles, onClick = {article -> navigateToDetails(article)})
     }
 }

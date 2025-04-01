@@ -1,9 +1,9 @@
+package com.example.assaply.presentation.details
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.assaply.data.domain.model.Article
 import com.example.assaply.data.domain.usecases.news.NewsUsecases
-import com.example.assaply.presentation.details.DetailsEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

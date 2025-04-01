@@ -1,22 +1,33 @@
 package com.example.assaply.presentation.welcome
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.pager.*
+import com.example.assaply.presentation.navgraph.Route
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.assaply.presentation.Dimensions.MediumPadding2
 import com.example.assaply.presentation.welcome.components.WelcomePage
 import kotlinx.coroutines.launch
-import androidx.constraintlayout.compose.ConstraintLayout
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun WelcomeScreen(
+    navController: NavController,
     event: (WelcomeEvent)->Unit
+
 ) {
     val pagerState = rememberPagerState { pages.size }
     val coroutineScope = rememberCoroutineScope()
@@ -63,7 +74,12 @@ fun WelcomeScreen(
                 }
             } else {
                 TextButton(
-                    onClick = { event(WelcomeEvent.Finish) },
+                    onClick = {
+                        event(WelcomeEvent.Finish)
+                        navController.navigate(Route.NewsNavScreen.route) {
+                            popUpTo(Route.AppStartNav.route) { inclusive = true }
+                        }
+                    },
                     modifier = Modifier.constrainAs(finishButton) {
                         centerHorizontallyTo(parent)
                         top.linkTo(parent.top)
@@ -80,5 +96,9 @@ fun WelcomeScreen(
 @Preview(showBackground = true)
 @Composable
 fun WelcomeScreenPreview() {
-    WelcomeScreen(event = {})
+    val fakeNavController = rememberNavController()
+    WelcomeScreen(
+        navController = fakeNavController,
+        event = {}
+    )
 }

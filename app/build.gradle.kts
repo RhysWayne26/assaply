@@ -3,8 +3,9 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.ksp)
     id("kotlin-kapt")
+    id("kotlin-parcelize")
+
 }
 
 android {
@@ -64,6 +65,7 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     implementation(libs.accompanist.systemuicontroller)
     kapt(libs.hilt.compiler)
+    kapt(libs.androidx.room.compiler)
     implementation(libs.retrofit)
     implementation(libs.androidx.paging.runtime)
     implementation(libs.converter.gson)
@@ -71,7 +73,7 @@ dependencies {
     implementation(libs.androidx.paging.compose)
     implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.androidx.room.runtime)
-    ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.paging)
+
 }

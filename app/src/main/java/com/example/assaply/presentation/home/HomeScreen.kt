@@ -24,12 +24,12 @@ import com.example.assaply.presentation.Dimensions.MediumPadding1
 import com.example.assaply.presentation.common.ArticleCard
 import com.example.assaply.presentation.common.ArticlesList
 import com.example.assaply.presentation.common.SearchBar
-import com.example.assaply.presentation.navgraph.Route
 
 @Composable
 fun HomeScreen(
     articles: LazyPagingItems<Article>,
-    navigate: (String) -> Unit
+    navigateToSearch: () -> Unit,
+    navigateToDetails: (Article) -> Unit
 ) {
     val titles by remember {
         derivedStateOf {
@@ -62,7 +62,7 @@ fun HomeScreen(
             readOnly = true,
             onValueChange = {},
             onClick = {
-                navigate(Route.SearchScreen.route)
+                navigateToSearch()
             },
             onSearch = {}
         )
@@ -73,7 +73,7 @@ fun HomeScreen(
             modifier = Modifier.padding(horizontal = MediumPadding1),
             articles = articles.itemSnapshotList.items,
             onClick = {
-                navigate(Route.DetailsScreen.route)
+                navigateToDetails(it)
             }
         )
     }

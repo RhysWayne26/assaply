@@ -73,12 +73,15 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNewsDatabase(application: Application): NewsDatabase{
+    fun provideNewsDatabase(
+        application: Application,
+    ): NewsDatabase{
         return Room.databaseBuilder(
             context = application,
             klass = NewsDatabase::class.java,
             name = "news_db"
-        ).fallbackToDestructiveMigration()
+        )
+            .fallbackToDestructiveMigration()
             .build()
     }
 

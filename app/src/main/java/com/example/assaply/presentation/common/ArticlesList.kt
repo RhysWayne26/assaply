@@ -17,25 +17,31 @@ import com.example.assaply.data.domain.model.Article
 import com.example.assaply.presentation.Dimensions.ExtraSmallPadding2
 import com.example.assaply.presentation.Dimensions.MediumPadding1
 
+
 @Composable
 fun ArticlesList(
     modifier: Modifier = Modifier,
     articles: List<Article>,
     onClick: (Article) -> Unit
 ) {
+    if (articles.isEmpty()){
+        EmptyScreen()
+    }
     LazyColumn(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(MediumPadding1),
         contentPadding = PaddingValues(all = ExtraSmallPadding2)
-    ){
-        items(count = articles.size){
-            val article =articles[it]
-                ArticleCard(article = article, onClick = { onClick(article)})
-
+    ) {
+        items(
+            count = articles.size,
+        ) {
+            articles[it].let { article ->
+                ArticleCard(article = article, onClick = { onClick(article) })
+            }
         }
     }
-}
 
+}
 
 @Composable
 fun handlePagingResult(articles: LazyPagingItems<Article>): Boolean{

@@ -6,45 +6,37 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.example.assaply.presentation.bookmark.BookmarkScreen
 import com.example.assaply.presentation.bookmark.BookmarkViewModel
 import com.example.assaply.presentation.home.HomeViewModel
+import com.example.assaply.presentation.news_navigation.NewsNavigator
 import com.example.assaply.presentation.welcome.WelcomeScreen
 import com.example.assaply.presentation.welcome.WelcomeViewModel
 
 @Composable
-fun NavGraph(startDestination: String){
+fun NavGraph(startDestination: String) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = startDestination){
+
+    NavHost(navController = navController, startDestination = startDestination) {
+
         navigation(
             route = Route.AppStartNav.route,
             startDestination = Route.WelcomeScreen.route
-        ){
-            composable(
-                route = Route.WelcomeScreen.route
-            ){
+        ) {
+            composable(route = Route.WelcomeScreen.route) {
                 val viewModel: WelcomeViewModel = hiltViewModel()
-                WelcomeScreen (
+                WelcomeScreen(
+                    navController = navController,
                     event = viewModel::onEvent
                 )
             }
         }
-        navigation(
-            route = Route.NewsNav.route,
-            startDestination = Route.NewsNavScreen.route
-        ){
-            composable(route=Route.NewsNavScreen.route){
-                val viewModel: HomeViewModel = hiltViewModel()
 
-            }
-        }
         navigation(
             route = Route.NewsNav.route,
             startDestination = Route.NewsNavScreen.route
-        ){
-            composable(route=Route.NewsNavScreen.route){
-                val viewModel: BookmarkViewModel = hiltViewModel()
-                BookmarkScreen(state = viewModel.state.value, navigate = {})
+        ) {
+            composable(route = Route.NewsNavScreen.route) {
+                NewsNavigator()
             }
         }
     }

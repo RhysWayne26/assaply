@@ -25,7 +25,7 @@ import com.example.assaply.presentation.Dimensions.IconSize
 import com.example.assaply.ui.theme.AssaplyTheme
 
 @Composable
-fun NewsButtonNavigation(
+fun NewsBottomNavigation(
     items: List<ButtonNavigationItem>,
     selected: Int,
     onItemClick:(Int)->Unit
@@ -71,9 +71,9 @@ data class ButtonNavigationItem(
 
 @Preview(showBackground = true)
 @Composable
-fun NewsButtonNavigationPreview() {
+fun NewsBottomNavigationPreview() {
     AssaplyTheme {
-        NewsButtonNavigation(
+        NewsBottomNavigation(
             items = listOf(
                 ButtonNavigationItem(icon = R.drawable.ic_home, text = "Home"),
                 ButtonNavigationItem(icon = R.drawable.ic_search, text = "Search"),

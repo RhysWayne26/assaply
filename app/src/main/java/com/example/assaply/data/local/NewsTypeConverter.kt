@@ -1,10 +1,8 @@
 package com.example.assaply.data.local
 
-import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.example.assaply.data.domain.model.Source
 
-@ProvidedTypeConverter
 class NewsTypeConverter {
 
     @TypeConverter
