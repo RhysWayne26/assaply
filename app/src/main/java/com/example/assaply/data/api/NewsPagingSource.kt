@@ -24,7 +24,7 @@ class NewsPagingSource(
         val page = params.key ?: 1
 
         return try {
-            val response = newsApi.getNews(page = page, sources = sources)
+            val response = newsApi.getNews(page = page, sources = sources, query = searchQuery)
 
             totalNewsCount = response.articles.size
             val articles = response.articles.distinctBy { article -> article.title }
