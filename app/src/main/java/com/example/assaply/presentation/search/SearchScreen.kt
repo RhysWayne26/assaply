@@ -1,5 +1,6 @@
 package com.example.assaply.presentation.search
 
+import ArticlesList
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -10,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.assaply.data.domain.model.Article
 import com.example.assaply.presentation.Dimensions.MediumPadding1
-import com.example.assaply.presentation.common.ArticlesList
 import com.example.assaply.presentation.common.SearchBar
+
 
 @Composable
 fun SearchScreen(
@@ -37,7 +38,7 @@ fun SearchScreen(
         state.articles?.let {
             val articles = it.collectAsLazyPagingItems()
             ArticlesList(
-                articles = articles.itemSnapshotList.items,
+                articles = articles,
                 onClick = navigateToDetails
             )
         }

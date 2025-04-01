@@ -1,7 +1,6 @@
 package com.example.assaply.presentation.welcome
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import com.example.assaply.presentation.navgraph.Route
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,6 +18,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.assaply.presentation.Dimensions.MediumPadding2
+import com.example.assaply.presentation.navgraph.Route
 import com.example.assaply.presentation.welcome.components.WelcomePage
 import kotlinx.coroutines.launch
 
@@ -26,15 +26,13 @@ import kotlinx.coroutines.launch
 @Composable
 fun WelcomeScreen(
     navController: NavController,
-    event: (WelcomeEvent)->Unit
-
+    event: (WelcomeEvent) -> Unit
 ) {
     val pagerState = rememberPagerState { pages.size }
     val coroutineScope = rememberCoroutineScope()
 
     Column(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         HorizontalPager(state = pagerState) { page ->
@@ -50,7 +48,12 @@ fun WelcomeScreen(
 
             if (pagerState.currentPage < pages.lastIndex) {
                 TextButton(
-                    onClick = { event(WelcomeEvent.Skip) },
+                    onClick = {
+                        event(WelcomeEvent.Skip)
+                        navController.navigate(Route.NewsNavScreen.route) {
+                            popUpTo(Route.AppStartNav.route) { inclusive = true }
+                        }
+                    },
                     modifier = Modifier.constrainAs(skipButton) {
                         start.linkTo(parent.start)
                         top.linkTo(parent.top)
@@ -91,7 +94,6 @@ fun WelcomeScreen(
         }
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable

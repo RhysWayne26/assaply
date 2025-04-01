@@ -11,12 +11,13 @@ import javax.inject.Inject
 class WelcomeViewModel @Inject constructor(
     private val appEntryUsecases: AppEntryUsecases
 ): ViewModel() {
-    fun onEvent(event: WelcomeEvent){
-        when(event){
-            is WelcomeEvent.SaveAppEntry->{
+    fun onEvent(event: WelcomeEvent) {
+        when (event) {
+            is WelcomeEvent.SaveAppEntry,
+            is WelcomeEvent.Skip,
+            is WelcomeEvent.Finish -> {
                 saveAppEntry()
             }
-            else->return
         }
     }
     private fun saveAppEntry(){

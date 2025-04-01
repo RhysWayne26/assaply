@@ -6,8 +6,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.example.assaply.presentation.bookmark.BookmarkViewModel
-import com.example.assaply.presentation.home.HomeViewModel
 import com.example.assaply.presentation.news_navigation.NewsNavigator
 import com.example.assaply.presentation.welcome.WelcomeScreen
 import com.example.assaply.presentation.welcome.WelcomeViewModel

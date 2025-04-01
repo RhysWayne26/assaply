@@ -1,7 +1,8 @@
 package com.example.assaply.presentation.home
 
 //noinspection SuspiciousImport
-import android.R
+import ArticlesList
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,16 +20,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
+import com.example.assaply.R
 import com.example.assaply.data.domain.model.Article
 import com.example.assaply.presentation.Dimensions.MediumPadding1
 import com.example.assaply.presentation.common.ArticleCard
-import com.example.assaply.presentation.common.ArticlesList
-import com.example.assaply.presentation.common.SearchBar
 
 @Composable
 fun HomeScreen(
     articles: LazyPagingItems<Article>,
-    navigateToSearch: () -> Unit,
     navigateToDetails: (Article) -> Unit
 ) {
     val titles by remember {
@@ -41,8 +40,6 @@ fun HomeScreen(
         }
     }
 
-    val searchText = remember { "" }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -50,22 +47,11 @@ fun HomeScreen(
             .statusBarsPadding()
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_menu_gallery),
+            painter = painterResource(id = R.drawable.ic_launcher_foreground),
             contentDescription = null,
             modifier = Modifier.padding(horizontal = MediumPadding1)
         )
 
-        Spacer(modifier = Modifier.height(MediumPadding1))
-
-        SearchBar(
-            text = searchText,
-            readOnly = true,
-            onValueChange = {},
-            onClick = {
-                navigateToSearch()
-            },
-            onSearch = {}
-        )
 
         Spacer(modifier = Modifier.height(MediumPadding1))
 
@@ -88,7 +74,7 @@ fun HomeScreenPreview() {
             content = "Content 1",
             author = "Author A",
             description = "Short description 1",
-            publishedAt = "2025-03-26T12:00:00Z",
+            publishedAt = "woo woo",
             source = com.example.assaply.data.domain.model.Source("1", "Mock Source"),
             url = "https://example.com/news1",
             urlToImage = ""
@@ -98,7 +84,7 @@ fun HomeScreenPreview() {
             content = "Content 2",
             author = "Author B",
             description = "Short description 2",
-            publishedAt = "2025-03-25T10:30:00Z",
+            publishedAt = "woo woo",
             source = com.example.assaply.data.domain.model.Source("2", "Mock Source 2"),
             url = "https://example.com/news2",
             urlToImage = ""

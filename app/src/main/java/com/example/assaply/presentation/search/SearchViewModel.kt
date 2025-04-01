@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val newsUseсases: NewsUsecases
+    private val newsUsecases: NewsUsecases
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(SearchState())
@@ -24,7 +24,6 @@ class SearchViewModel @Inject constructor(
             is SearchEvent.UpdateSearchQuery -> {
                 _state.update { it.copy(searchQuery = event.searchQuery) }
             }
-
             is SearchEvent.SearchNews -> {
                 searchNews()
             }
@@ -32,11 +31,10 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun searchNews() {
-        val articlesFlow = newsUseсases.searchNews(
+        val articlesFlow = newsUsecases.searchNews(
             searchQuery = _state.value.searchQuery,
             sources = listOf("abc-news", "bbc-news", "al-jazeera-english")
         ).cachedIn(viewModelScope)
-
         _state.update { it.copy(articles = articlesFlow) }
     }
 }
