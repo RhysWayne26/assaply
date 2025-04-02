@@ -43,9 +43,9 @@ fun NewsNavigator() {
 
     val bottomNavigationItems = remember {
         listOf(
-            ButtonNavigationItem(icon = R.drawable.ic_home, text = "Home"),
-            ButtonNavigationItem(icon = R.drawable.ic_search, text = "Search"),
-            ButtonNavigationItem(icon = R.drawable.ic_bookmark, text = "Bookmark")
+            ButtonNavigationItem(icon = R.drawable.ic_home, text = ""),
+            ButtonNavigationItem(icon = R.drawable.ic_search, text = ""),
+            ButtonNavigationItem(icon = R.drawable.ic_bookmark, text = "")
         )
     }
 

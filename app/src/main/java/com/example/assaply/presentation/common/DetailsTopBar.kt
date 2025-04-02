@@ -18,8 +18,8 @@ import com.example.assaply.ui.theme.AssaplyTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailsTopBar(
+    onBookmarkClick: () -> Unit,
     onBrowsingClick: () -> Unit,
-    onBookMarkClick: () -> Unit
 ) {
 
     TopAppBar(
@@ -31,13 +31,11 @@ fun DetailsTopBar(
         ),
         title = {},
         actions = {
-
-            TextButton(onClick = onBookMarkClick) {
-                Text(text = "Mark")
-            }
-
             TextButton(onClick = onBrowsingClick) {
                 Text(text = "Browse")
+            }
+            TextButton(onClick = onBookmarkClick) {
+                Text(text = "Mark/Unmark")
             }
         },
     )
@@ -48,7 +46,7 @@ fun DetailsTopBar(
 fun DetailsTopBarPreview() {
     AssaplyTheme {
         DetailsTopBar(
-            onBookMarkClick = {},
+            onBookmarkClick = {},
             onBrowsingClick = {}
         )
     }

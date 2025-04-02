@@ -48,7 +48,7 @@ fun DetailsScreen(
                     }
                 }
             },
-            onBookMarkClick = {
+            onBookmarkClick = {
                 event(DetailsEvent.UpsertDeleteArticle(article))
             }
         )

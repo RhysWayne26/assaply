@@ -5,4 +5,10 @@ object Constants {
     const val USER_SETTINGS = "userSettings"
     const val APP_ENTRY = "appEntry"
     const val API_KEY = "9c323bbe78324c87a7490d17e8a697a6"
+    val DEFAULT_SOURCES = listOf(
+        "techcrunch",
+        "the-verge",
+        "wired",
+        "crypto-coins-news"
+    )
 }

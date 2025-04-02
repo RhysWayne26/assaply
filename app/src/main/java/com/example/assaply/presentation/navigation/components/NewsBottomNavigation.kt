@@ -15,14 +15,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.assaply.R
+import com.example.assaply.ui.theme.AssaplyTheme
 import com.example.assaply.util.Dimensions.ExtraSmallPadding2
 import com.example.assaply.util.Dimensions.IconSize
-import com.example.assaply.ui.theme.AssaplyTheme
 
 @Composable
 fun NewsBottomNavigation(
@@ -40,14 +41,19 @@ fun NewsBottomNavigation(
                 selected = index == selected,
                 onClick = {onItemClick(index)},
                 icon = {
-                    Column(horizontalAlignment = CenterHorizontally){
+                    Column(horizontalAlignment = CenterHorizontally) {
                         Icon(
                             painter = painterResource(id = item.icon),
                             contentDescription = null,
                             modifier = Modifier.size(IconSize)
                         )
-                        Spacer(modifier = Modifier.height(ExtraSmallPadding2))
-                        Text(text = item.text, style = MaterialTheme.typography.labelSmall)
+                        if (item.text.isNotBlank()) {
+                            Spacer(modifier = Modifier.height(ExtraSmallPadding2))
+                            Text(
+                                text = item.text,
+                                style = MaterialTheme.typography.labelSmall
+                            )
+                        }
                     }
                 },
                 colors = NavigationBarItemDefaults.colors(
@@ -55,7 +61,7 @@ fun NewsBottomNavigation(
                     selectedTextColor = MaterialTheme.colorScheme.primary,
                     unselectedIconColor = colorResource(id = R.color.body),
                     unselectedTextColor = colorResource(id = R.color.body),
-                    indicatorColor = MaterialTheme.colorScheme.background
+                    indicatorColor = Color.Transparent
                 )
             )
 
@@ -75,9 +81,9 @@ fun NewsBottomNavigationPreview() {
     AssaplyTheme {
         NewsBottomNavigation(
             items = listOf(
-                ButtonNavigationItem(icon = R.drawable.ic_home, text = "Home"),
-                ButtonNavigationItem(icon = R.drawable.ic_search, text = "Search"),
-                ButtonNavigationItem(icon = R.drawable.ic_bookmark, text = "Bookmark")
+                ButtonNavigationItem(icon = R.drawable.ic_home, text = ""),
+                ButtonNavigationItem(icon = R.drawable.ic_search, text = ""),
+                ButtonNavigationItem(icon = R.drawable.ic_bookmark, text = "")
             ),
             selected = 0,
             onItemClick = {}

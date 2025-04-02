@@ -1,12 +1,9 @@
 package com.example.assaply.presentation.common
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
-@RequiresApi(Build.VERSION_CODES.O)
 fun formatPublishedAt(dateString: String?): String {
     return try {
         if (dateString == null) return "—"

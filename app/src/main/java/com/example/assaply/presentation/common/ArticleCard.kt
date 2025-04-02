@@ -95,13 +95,6 @@ fun ArticleCard(
                     color = colorResource(id = R.color.body)
                 )
                 Spacer(modifier = Modifier.width(ExtraSmallPadding2))
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_time),
-                    contentDescription = null,
-                    modifier = Modifier.size(SmallIconSize),
-                    tint = colorResource(id = R.color.body)
-                )
-                Spacer(modifier = Modifier.width(ExtraSmallPadding2))
                 Text(
                     text = formatPublishedAt(article.publishedAt),
                     style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
