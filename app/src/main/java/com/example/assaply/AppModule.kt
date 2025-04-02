@@ -33,7 +33,7 @@ object AppModule {
     fun provideNewsUsecases(
         repository: NewsRepository,
         dao: NewsDao
-    ) = NewsUsecases(repository, dao)
+    ): NewsUsecases = NewsUsecases(repository, dao)
 
     @Provides
     @Singleton
@@ -42,12 +42,16 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNewsApi(): NewsApi =
+    fun provideRetrofit(): Retrofit =
         Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(NewsApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideNewsApi(retrofit: Retrofit): NewsApi =
+        retrofit.create(NewsApi::class.java)
 
     @Provides
     @Singleton
@@ -66,3 +70,4 @@ object AppModule {
     @Singleton
     fun provideNewsTypeConverter(): NewsTypeConverter = NewsTypeConverter()
 }
+
