@@ -6,6 +6,7 @@ import androidx.paging.PagingData
 import com.example.assaply.data.api.NewsApi
 import com.example.assaply.data.api.NewsPagingSource
 import com.example.assaply.data.domain.entities.Article
+import com.example.assaply.data.room.NewsDao
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
@@ -14,7 +15,8 @@ import kotlinx.coroutines.flow.Flow
 @Module
 @InstallIn(SingletonComponent::class)
 class NewsRepositoryImplementation(
-    private val newsApi: NewsApi
+    private val newsApi: NewsApi,
+    private val newsDao: NewsDao
 ) : NewsRepository {
 
     override fun getNews(sources: List<String>): Flow<PagingData<Article>> {
@@ -43,19 +45,19 @@ class NewsRepositoryImplementation(
     }
 
     override suspend fun upsertArticle(article: Article) {
-        TODO("upsertArticle is not yet implemented")
+        newsDao.upsert(article)
     }
 
     override suspend fun deleteArticle(article: Article) {
-        TODO("deleteArticle is not yet implemented")
+        newsDao.delete(article)
     }
 
     override fun getArticles(): Flow<List<Article>> {
-        TODO("getArticles is not yet implemented")
+        return newsDao.getArticles()
     }
 
     override suspend fun getArticle(url: String): Article? {
-        TODO("getArticle is not yet implemented")
+        return newsDao.getArticle(url)
     }
 
 

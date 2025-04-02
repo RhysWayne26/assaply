@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.net.toUri
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -90,4 +91,24 @@ fun DetailsScreen(
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DetailsScreenPreview() {
+    val mockArticle = Article(
+        author = "Mock Author",
+        content = "This is a long article content used for previewing the Details screen in Jetpack Compose.",
+        description = "This is a mock description.",
+        publishedAt = "2025-04-01T10:00:00Z",
+        source = com.example.assaply.data.domain.entities.Source(id = "mock-id", name = "Mock Source"),
+        title = "Preview Article Title for Details Screen",
+        url = "https://example.com/details-article",
+        urlToImage = "https://via.placeholder.com/600x300.png?text=Preview+Image"
+    )
+
+    DetailsScreen(
+        article = mockArticle,
+        event = {}
+    )
 }

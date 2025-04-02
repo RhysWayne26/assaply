@@ -8,12 +8,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.assaply.data.domain.entities.Article
-import com.example.assaply.util.Dimensions.MediumPadding1
 import com.example.assaply.presentation.common.SearchBar
 import com.example.assaply.presentation.events.SearchEvent
 import com.example.assaply.presentation.states.SearchState
+import com.example.assaply.util.Dimensions.MediumPadding1
 
 
 @Composable
@@ -45,4 +46,19 @@ fun SearchScreen(
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SearchScreenPreview() {
+    val mockState = SearchState(
+        searchQuery = "mock news",
+        articles = null
+    )
+
+    SearchScreen(
+        state = mockState,
+        event = {},
+        navigateToDetails = {}
+    )
 }

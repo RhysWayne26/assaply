@@ -16,7 +16,6 @@ class DetailsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _sideEffect = mutableStateOf<String?>(null)
-    val sideEffect: String? get() = _sideEffect.value
 
     fun onEvent(event: DetailsEvent) {
         when (event) {

@@ -11,7 +11,7 @@ class NewsPagingSource(
     private val searchQuery: String? = null
 ): PagingSource<Int, Article>() {
 
-    private var totalNewsCount =0
+    private var totalNewsCount = 0
     override fun getRefreshKey(state: PagingState<Int, Article>): Int? {
         return state.anchorPosition?.let{
             anchorPosition ->
