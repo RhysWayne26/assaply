@@ -1,11 +1,14 @@
 package com.example.assaply
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.example.assaply.data.api.NewsApi
 import com.example.assaply.data.domain.NewsUsecases
-import com.example.assaply.data.repository.NewsRepository
-import com.example.assaply.data.repository.NewsRepositoryImplementation
+import com.example.assaply.data.repository.local.SavedArticlesRepository
+import com.example.assaply.data.repository.local.SavedArticlesRepositoryImpl
+import com.example.assaply.data.repository.remote.RemoteNewsRepository
+import com.example.assaply.data.repository.remote.RemoteNewsRepositoryImpl
 import com.example.assaply.data.room.NewsDao
 import com.example.assaply.data.room.NewsDatabase
 import com.example.assaply.data.room.NewsTypeConverter
@@ -14,6 +17,7 @@ import com.example.assaply.util.UserPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -31,16 +35,25 @@ object AppModule {
     @Provides
     @Singleton
     fun provideNewsUsecases(
-        repository: NewsRepository
-    ) = NewsUsecases(repository)
+        remoteRepo: RemoteNewsRepository,
+        localRepo: SavedArticlesRepository
+
+    ) = NewsUsecases(remoteRepo, localRepo)
 
     @Provides
     @Singleton
-    fun provideNewsRepository(
-        newsApi: NewsApi,
+    fun provideLocalDataRepository(
         newsDao: NewsDao
-    ): NewsRepository =
-        NewsRepositoryImplementation(newsApi, newsDao)
+    ): SavedArticlesRepository =
+        SavedArticlesRepositoryImpl(newsDao)
+
+    @Provides
+    @Singleton
+    fun provideRemoteDataRepository(
+        newsApi: NewsApi,
+        @ApplicationContext context: Context
+    ): RemoteNewsRepository =
+        RemoteNewsRepositoryImpl(newsApi, context)
 
     @Provides
     @Singleton

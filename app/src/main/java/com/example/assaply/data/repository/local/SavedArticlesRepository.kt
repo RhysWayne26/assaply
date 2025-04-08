@@ -1,13 +1,9 @@
-package com.example.assaply.data.repository
+package com.example.assaply.data.repository.local
 
-import androidx.paging.PagingData
 import com.example.assaply.data.domain.entities.Article
-
 import kotlinx.coroutines.flow.Flow
 
-interface NewsRepository {
-    fun getNews(sources: List<String>): Flow<PagingData<Article>>
-    fun searchNews(searchQuery: String, sources: List<String>): Flow<PagingData<Article>>
+interface SavedArticlesRepository{
     suspend fun upsertArticle(article: Article)
     suspend fun deleteArticle(article: Article)
     fun getArticles(): Flow<List<Article>>

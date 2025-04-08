@@ -27,11 +27,10 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.assaply.R
+import com.example.assaply.ui.theme.AssaplyTheme
 import com.example.assaply.util.Dimensions.ArticleCardSize
 import com.example.assaply.util.Dimensions.ExtraSmallPadding
 import com.example.assaply.util.Dimensions.ExtraSmallPadding2
-import com.example.assaply.util.Dimensions.SmallIconSize
-import com.example.assaply.ui.theme.AssaplyTheme
 
 @SuppressLint("UnnecessaryComposedModifier")
 fun Modifier.shimmerEffect() = composed{
@@ -83,14 +82,6 @@ fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
                     modifier = Modifier
                         .height(MaterialTheme.typography.labelMedium.lineHeight.value.dp)
                         .width(40.dp)
-                        .clip(MaterialTheme.shapes.small)
-                        .shimmerEffect()
-                )
-                Spacer(modifier = Modifier.width(ExtraSmallPadding2))
-
-                Box(
-                    modifier = Modifier
-                        .size(SmallIconSize)
                         .clip(MaterialTheme.shapes.small)
                         .shimmerEffect()
                 )

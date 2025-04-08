@@ -41,7 +41,7 @@ fun DetailsScreen(
             .statusBarsPadding()
     ) {
         DetailsTopBar(
-            onBrowsingClick = {
+            onOpenInBrowser = {
                 Intent(Intent.ACTION_VIEW).also {
                     it.data = article.url.toUri()
                     if (it.resolveActivity(context.packageManager) != null) {

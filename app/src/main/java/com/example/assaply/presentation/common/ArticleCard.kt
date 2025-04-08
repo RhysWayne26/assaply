@@ -29,10 +29,14 @@ import coil.request.ImageRequest
 import com.example.assaply.R
 import com.example.assaply.data.domain.entities.Article
 import com.example.assaply.data.domain.entities.Source
+import com.example.assaply.ui.theme.AssaplyTheme
 import com.example.assaply.util.Dimensions.ArticleCardSize
 import com.example.assaply.util.Dimensions.ExtraSmallPadding
 import com.example.assaply.util.Dimensions.ExtraSmallPadding2
-import com.example.assaply.ui.theme.AssaplyTheme
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 @Composable
 fun ArticleCard(
@@ -94,7 +98,7 @@ fun ArticleCard(
                 )
                 Spacer(modifier = Modifier.width(ExtraSmallPadding2))
                 Text(
-                    text = formatPublishedAt(article.publishedAt),
+                    text = rememberLocalizedDate(article.publishedAt),
                     style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
                     color = colorResource(id = R.color.body)
                 )
@@ -104,6 +108,25 @@ fun ArticleCard(
 
 }
 
+fun formatPublishedAtLocalized(dateString: String?, locale: Locale): String {
+    return try {
+        if (dateString == null) return "—"
+        val utcZoned = ZonedDateTime.parse(dateString)
+        val localTime = utcZoned.withZoneSameInstant(ZoneId.systemDefault())
+        val formatter = DateTimeFormatter.ofPattern("d MMMM, HH:mm", locale)
+        formatter.format(localTime)
+    } catch (_: Exception) {
+        "—"
+    }
+}
+
+
+@Composable
+fun rememberLocalizedDate(dateString: String?): String {
+    val context = LocalContext.current
+    val locale = context.resources.configuration.locales[0]
+    return formatPublishedAtLocalized(dateString, locale)
+}
 
 @Preview(showBackground = true)
 @Composable
@@ -125,4 +148,3 @@ fun ArticleCardPreview() {
         )
     }
 }
-

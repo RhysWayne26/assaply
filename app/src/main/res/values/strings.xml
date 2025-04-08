@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">assaply</string>
+    <string name="bookmark">Mark/Unmark</string>
+    <string name="browse">Browse</string>
+    <string name="search_hint">Search…</string>
+    <string name="timeout_error">Server timeout. Please try again.</string>
+    <string name="no_results">No results found.</string>
+    <string name="unknown_error">Unknown error occurred.</string>
+    <string name="read_more">Read more</string>
+    <string name="no_description">No description</string>
 </resources>

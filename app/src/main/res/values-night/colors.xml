@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="display_small">#FFFFFF</color>
+    <color name="text_medium">#FFB0B0B0</color>
+    <color name="text_title">#FFFFFF</color>
+    <color name="body">#B0B0B0</color>
+    <color name="input_background">#1E1E1E</color>
+    <color name="placeholder">#A0A3BD</color>
+    <color name="shimmer">#444444</color>
+    <color name="android_emblem">#FF0000</color>
+</resources>

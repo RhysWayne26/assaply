@@ -14,8 +14,8 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,7 +41,7 @@ fun HomeScreen(
             painter = painterResource(id = R.drawable.ic_launcher_foreground),
             contentDescription = null,
             modifier = Modifier.padding(horizontal = MediumPadding1),
-            colorFilter = ColorFilter.tint(Color.Green)
+            colorFilter = ColorFilter.tint(colorResource(id = R.color.android_emblem))
         )
 
         ArticlesList(

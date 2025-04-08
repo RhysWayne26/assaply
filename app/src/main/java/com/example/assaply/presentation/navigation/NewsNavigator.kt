@@ -103,9 +103,11 @@ fun NewsNavigator() {
             composable(Route.SEARCH_SCREEN) {
                 val viewModel: SearchViewModel = hiltViewModel()
                 val state = viewModel.state.collectAsState().value
-                OnBackClickStateSaver(navController)
+                val articles = viewModel.articles.collectAsLazyPagingItems()
+
                 SearchScreen(
                     state = state,
+                    articles = articles,
                     event = viewModel::onEvent,
                     navigateToDetails = { article ->
                         navigateToDetails(navController, article)

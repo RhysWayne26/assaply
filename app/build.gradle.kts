@@ -19,7 +19,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.assaply.HiltTestRunner"
     }
 
     buildTypes {
@@ -75,5 +75,16 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.paging)
-    implementation("androidx.paging:paging-compose:3.2.1")
+    implementation(libs.androidx.paging.compose.v321)
+    testImplementation(libs.mockk)
+    testImplementation(libs.assertj.core)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.androidx.core.testing)
+    testImplementation(libs.hilt.android.testing)
+    kaptTest(libs.hilt.compiler.v250)
+    androidTestImplementation(libs.hilt.android.testing)
+    kaptAndroidTest(libs.hilt.compiler)
+    androidTestImplementation(libs.androidx.core)
 }
+
+

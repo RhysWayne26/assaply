@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ассаплай</string>
+    <string name="bookmark">Добавить/убрать метку</string>
+    <string name="browse">Читать далее</string>
+    <string name="search_hint">Найти…</string>
+    <string name="timeout_error">Сервер таймаут. Попробуйте лучше.</string>
+    <string name="no_results">Ничего не найдено.</string>
+    <string name="unknown_error">Произошла неизвестная ошибка.</string>
+    <string name="read_more">Читать полностью</string>
+    <string name="no_description">Нет описания</string>
+</resources>

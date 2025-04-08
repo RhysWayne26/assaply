@@ -19,9 +19,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.assaply.R
 import com.example.assaply.ui.theme.AssaplyTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,7 +51,7 @@ fun SearchBar(
                 .fillMaxWidth()
                 .searchBarBorder(),
             placeholder = {
-                Text("Search...", style = MaterialTheme.typography.bodyMedium)
+                Text(text = stringResource(R.string.search_hint), style = MaterialTheme.typography.bodyMedium)
             },
             textStyle = MaterialTheme.typography.bodyMedium.copy(
                 color = MaterialTheme.colorScheme.onBackground
@@ -85,7 +87,13 @@ fun Modifier.searchBarBorder() = composed {
             )
         )
     } else {
-        this
+        this.then(
+            Modifier.border(
+                width = 1.dp,
+                color = Color.White,
+                shape = MaterialTheme.shapes.medium
+            )
+        )
     }
 }
 
