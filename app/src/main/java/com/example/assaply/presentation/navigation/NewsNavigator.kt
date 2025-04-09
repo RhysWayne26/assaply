@@ -102,18 +102,17 @@ fun NewsNavigator() {
 
             composable(Route.SEARCH_SCREEN) {
                 val viewModel: SearchViewModel = hiltViewModel()
-                val state = viewModel.state.collectAsState().value
-                val articles = viewModel.articles.collectAsLazyPagingItems()
+                val state by viewModel.state.collectAsState()
 
                 SearchScreen(
                     state = state,
-                    articles = articles,
                     event = viewModel::onEvent,
                     navigateToDetails = { article ->
                         navigateToDetails(navController, article)
                     }
                 )
             }
+
 
             composable(Route.BOOKMARK_SCREEN) {
                 val viewModel: BookmarkViewModel = hiltViewModel()

@@ -11,8 +11,5 @@ local.properties
 /build/
 /.gradle/
 /.idea/
-*.iml
-/app/src/androidTest/
-/app/src/test/
 *.log
 *.tmp

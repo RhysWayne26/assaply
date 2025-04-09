@@ -10,22 +10,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.paging.LoadState
-import androidx.paging.PagingData
-import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.assaply.data.domain.entities.Article
 import com.example.assaply.data.domain.entities.Source
 import com.example.assaply.presentation.common.SearchBar
 import com.example.assaply.presentation.events.SearchEvent
 import com.example.assaply.presentation.states.SearchState
 import com.example.assaply.util.Dimensions.MediumPadding1
-import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun SearchScreen(
     state: SearchState,
-    articles: LazyPagingItems<Article>,
     event: (SearchEvent) -> Unit,
     navigateToDetails: (Article) -> Unit
 ) {
@@ -60,9 +54,7 @@ fun SearchScreen(
                 }
         )
 
-        val isLoading = articles.loadState.refresh is LoadState.Loading
-
-        if (isLoading) {
+        if (state.isLoading) {
             ShimmerEffect(
                 modifier = Modifier.constrainAs(listRef) {
                     top.linkTo(spacerRef.bottom)
@@ -72,7 +64,7 @@ fun SearchScreen(
             )
         } else {
             ArticlesList(
-                articles = articles,
+                articles = state.articles,
                 onClick = navigateToDetails,
                 modifier = Modifier.constrainAs(listRef) {
                     top.linkTo(spacerRef.bottom)
@@ -110,12 +102,8 @@ fun SearchScreenPreview() {
         )
     )
 
-    val mockPagingData = PagingData.from(mockArticles)
-    val lazyPagingItems = flowOf(mockPagingData).collectAsLazyPagingItems()
-
     SearchScreen(
-        state = SearchState(searchQuery = "mock"),
-        articles = lazyPagingItems,
+        state = SearchState(searchQuery = "mock", articles = mockArticles),
         event = {},
         navigateToDetails = {}
     )
