@@ -28,18 +28,18 @@ class BookmarkViewModelTest {
 
     @Before
     fun setUp() {
+        // Устанавливаем тестовый диспетчер вместо Dispatchers.Main
         Dispatchers.setMain(testDispatcher)
         newsUsecases = mockk()
+
+        // Подготавливаем список фейковых статей, которые возвращает мок
         val fakeArticles = listOf(
             Article(
                 title = "Test 1", description = "Desc 1", url = "url1",
                 author = "rooster",
                 content = "shock content 1",
                 publishedAt = "4am",
-                source = Source(
-                    id = "1",
-                    name = "you mom",
-                ),
+                source = Source("1", "you mom"),
                 urlToImage = ""
             ),
             Article(
@@ -47,17 +47,22 @@ class BookmarkViewModelTest {
                 author = "rooster",
                 content = "shock content 2",
                 publishedAt = "4am",
-                source = Source(
-                    id = "2",
-                    name = "you mom",
-                ),
+                source = Source("2", "you mom"),
                 urlToImage = ""
-            ),
+            )
         )
+
+        // Мокаем возвращаемое значение usecase'а
         coEvery { newsUsecases.getSavedArticles() } returns flowOf(fakeArticles)
+
+        // Инициализируем ViewModel
         viewModel = BookmarkViewModel(newsUsecases)
     }
 
+    /**
+     * Проверка, что при инициализации ViewModel действительно загружает статьи из usecase.
+     * Сравниваем заголовки ожидаемых и фактически полученных статей.
+     */
     @Test
     fun `BookmarkViewModel loads saved articles on init`() = runTest {
         val expectedTitles = listOf("Test 1", "Test 2")
@@ -66,6 +71,10 @@ class BookmarkViewModelTest {
         assertEquals(expectedTitles, actualTitles)
     }
 
+    /**
+     * Проверка, что ViewModel корректно обрабатывает случай, когда сохранённых статей нет.
+     * Проверяем, что список в state пуст.
+     */
     @Test
     fun `BookmarkViewModel handles empty list`() = runTest {
         coEvery { newsUsecases.getSavedArticles() } returns flowOf(emptyList())
@@ -74,6 +83,9 @@ class BookmarkViewModelTest {
         assertEquals(0, viewModel.state.value.articles.size)
     }
 
+    /**
+     * Проверка, что количество сохранённых статей в состоянии ViewModel соответствует ожидаемому.
+     */
     @Test
     fun `BookmarkViewModel returns correct number of articles`() = runTest {
         assertEquals(2, viewModel.state.value.articles.size)
@@ -81,8 +93,10 @@ class BookmarkViewModelTest {
 
     @After
     fun tearDown() {
+        // Сброс Dispatchers.Main после каждого теста
         Dispatchers.resetMain()
     }
 }
+
 
 

@@ -29,6 +29,11 @@ class SavedArticlesRepositoryImplTest {
         urlToImage = "image_url"
     )
 
+    /**
+     * Проверяет, что метод `getArticles()` в репозитории возвращает статьи, предоставленные DAO.
+     * Мокаем возвращаемое значение `dao.getArticles()` как Flow со списком из одной статьи.
+     * Затем проверяем, что результат действительно содержит нужную статью.
+     */
     @Test
     fun `getArticles returns articles from dao`() = runTest {
         coEvery { dao.getArticles() } returns flowOf(listOf(article))
@@ -37,6 +42,10 @@ class SavedArticlesRepositoryImplTest {
         assertEquals("Saved Article", result.first().first().title)
     }
 
+    /**
+     * Проверяет, что метод `getArticle()` репозитория делегирует вызов методу DAO.
+     * Возвращаем из мока нужную статью и сравниваем результат.
+     */
     @Test
     fun `getArticle delegates to dao`() = runTest {
         coEvery { dao.getArticle(article.url) } returns article
@@ -45,12 +54,20 @@ class SavedArticlesRepositoryImplTest {
         assertEquals(article, result)
     }
 
+    /**
+     * Проверяет, что метод `upsertArticle()` вызывает соответствующий метод в DAO.
+     * Используем `coVerify` для проверки вызова.
+     */
     @Test
     fun `upsertArticle calls dao upsert`() = runTest {
         repository.upsertArticle(article)
         coVerify { dao.upsert(article) }
     }
 
+    /**
+     * Проверяет, что метод `deleteArticle()` вызывает соответствующий метод в DAO.
+     * Аналогично используем `coVerify`.
+     */
     @Test
     fun `deleteArticle calls dao delete`() = runTest {
         repository.deleteArticle(article)

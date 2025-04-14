@@ -29,21 +29,28 @@ class SearchViewModelTest {
 
     @Before
     fun setUp() {
+        // Устанавливаем тестовый диспетчер для корутин
         Dispatchers.setMain(testDispatcher)
+        // Мокаем зависимость usecases
         newsUsecases = mockk()
+        // Инициализируем ViewModel с моком
         viewModel = SearchViewModel(newsUsecases)
     }
 
     @Test
     fun `onEvent UpdateSearchQuery updates searchQuery in state`() = runTest {
+        // Передаём новое значение поискового запроса
         val query = "kotlin"
         viewModel.onEvent(SearchEvent.UpdateSearchQuery(query))
+
+        // Проверяем, что состояние ViewModel обновилось
         val state = viewModel.state.value
         assertEquals(query, state.searchQuery)
     }
 
     @Test
     fun `onEvent SearchNews updates state with articles`() = runTest {
+        // Подготавливаем фейковую статью
         val article = Article(
             title = "Title",
             description = "Desc",
@@ -55,13 +62,20 @@ class SearchViewModelTest {
             urlToImage = "image_url"
         )
 
+        // Оборачиваем статью в PagingData
         val pagingData = PagingData.from(listOf(article))
 
+        // Мокаем usecase на возврат этого PagingData
         coEvery { newsUsecases.searchNews(any(), any()) } returns flowOf(pagingData)
 
+        // Обновляем поисковый запрос и запускаем поиск
         viewModel.onEvent(SearchEvent.UpdateSearchQuery("kotlin"))
         viewModel.onEvent(SearchEvent.SearchNews)
+
+        // Даём немного времени для сбора данных
         kotlinx.coroutines.delay(200)
+
+        // Проверка: список статей содержит нужную статью
         val state = viewModel.state.value
         assertEquals(1, state.articles.size)
         assertEquals("Title", state.articles[0].title)
@@ -69,6 +83,7 @@ class SearchViewModelTest {
 
     @After
     fun tearDown() {
+        // Сбрасываем диспетчер после тестов
         Dispatchers.resetMain()
     }
 }

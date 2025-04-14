@@ -15,12 +15,17 @@ import org.junit.runner.RunWith
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.assaply.data.room.NewsDatabase
 
+/**
+ * Интеграционный тест для [NewsDao].
+ * Тесты используют in-memory базу данных для имитации реального взаимодействия с Room.
+ */
 @RunWith(AndroidJUnit4::class)
 class NewsDaoTest {
 
     private lateinit var db: NewsDatabase
     private lateinit var dao: NewsDao
 
+    // Пример статьи для использования в тестах
     private val article = Article(
         title = "Test Article",
         description = "Some description",
@@ -32,6 +37,9 @@ class NewsDaoTest {
         urlToImage = "https://image.jpg"
     )
 
+    /**
+     * Инициализация in-memory базы данных и получение DAO.
+     */
     @Before
     fun setup() {
         db = Room.inMemoryDatabaseBuilder(
@@ -41,11 +49,17 @@ class NewsDaoTest {
         dao = db.newsDao
     }
 
+    /**
+     * Закрытие базы данных после каждого теста.
+     */
     @After
     fun tearDown() {
         db.close()
     }
 
+    /**
+     * Проверяет, что статья может быть добавлена и получена по URL.
+     */
     @Test
     fun insertAndGetArticle() = runTest {
         dao.upsert(article)
@@ -53,6 +67,9 @@ class NewsDaoTest {
         assertEquals(article.title, result?.title)
     }
 
+    /**
+     * Проверяет, что список всех статей возвращает вставленную статью.
+     */
     @Test
     fun insertAndGetAllArticles() = runTest {
         dao.upsert(article)
@@ -61,6 +78,9 @@ class NewsDaoTest {
         assertEquals("Test Article", result[0].title)
     }
 
+    /**
+     * Проверяет удаление статьи из базы данных.
+     */
     @Test
     fun deleteArticle() = runTest {
         dao.upsert(article)

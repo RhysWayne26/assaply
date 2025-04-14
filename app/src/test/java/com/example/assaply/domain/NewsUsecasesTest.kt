@@ -37,6 +37,10 @@ class NewsUsecasesTest {
         usecases = NewsUsecases(remoteRepo, savedRepo)
     }
 
+    /**
+     * Проверяет, что usecase `getNews` вызывает метод получения новостей из remote репозитория.
+     * Ожидается возврат `PagingData`, полученного из фейкового репозитория.
+     */
     @Test
     fun `getNews calls remote repository`() = runTest {
         val flow = flowOf(PagingData.from(listOf(article)))
@@ -46,6 +50,10 @@ class NewsUsecasesTest {
         assertEquals(flow, result)
     }
 
+    /**
+     * Проверяет, что usecase `searchNews` вызывает поиск новостей по ключевому слову и источнику.
+     * Удостоверяется, что используется метод `searchNews` у remote репозитория.
+     */
     @Test
     fun `searchNews calls remote repository`() = runTest {
         val flow = flowOf(PagingData.from(listOf(article)))
@@ -55,6 +63,9 @@ class NewsUsecasesTest {
         assertEquals(flow, result)
     }
 
+    /**
+     * Проверяет, что `getSavedArticles` корректно возвращает сохранённые статьи из локального репозитория.
+     */
     @Test
     fun `getSavedArticles calls saved repository`() = runTest {
         val flow = flowOf(listOf(article))
@@ -64,6 +75,9 @@ class NewsUsecasesTest {
         assertEquals(flow, result)
     }
 
+    /**
+     * Проверяет, что метод `getArticle` корректно делегирует запрос сохранённой статьи в локальный репозиторий.
+     */
     @Test
     fun `getArticle calls saved repository`() = runTest {
         coEvery { savedRepo.getArticle("url") } returns article
@@ -72,12 +86,18 @@ class NewsUsecasesTest {
         assertEquals(article, result)
     }
 
+    /**
+     * Проверяет, что `upsertArticle` вызывает соответствующий метод сохранения в локальном репозитории.
+     */
     @Test
     fun `upsertArticle calls saved repository`() = runTest {
         usecases.upsertArticle(article)
         coVerify { savedRepo.upsertArticle(article) }
     }
 
+    /**
+     * Проверяет, что `deleteArticle` вызывает удаление статьи в локальном репозитории.
+     */
     @Test
     fun `deleteArticle calls saved repository`() = runTest {
         usecases.deleteArticle(article)

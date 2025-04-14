@@ -89,6 +89,8 @@ dependencies {
     androidTestImplementation(libs.androidx.core.v150)
     androidTestImplementation(libs.androidx.junit.v115)
     androidTestImplementation(libs.androidx.runner.v152)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockwebserver)
 }
 
 
