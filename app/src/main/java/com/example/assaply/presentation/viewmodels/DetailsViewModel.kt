@@ -9,15 +9,17 @@ import com.example.assaply.presentation.events.DetailsEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
     private val newsUsecases: NewsUsecases
 ) : ViewModel() {
 
-    private val _sideEffect = mutableStateOf<String?>(null)
-    val sideEffect: String?
-        get() = _sideEffect.value
+    var sideEffect by mutableStateOf<String?>(null)
+        private set
+
     fun onEvent(event: DetailsEvent) {
         when (event) {
             is DetailsEvent.UpsertDeleteArticle -> {
@@ -32,18 +34,18 @@ class DetailsViewModel @Inject constructor(
             }
 
             is DetailsEvent.RemoveSideEffect -> {
-                _sideEffect.value = null
+                sideEffect = null
             }
         }
     }
 
     private suspend fun upsertArticle(article: Article) {
         newsUsecases.upsertArticle(article)
-        _sideEffect.value = "Article Saved"
+        sideEffect = "Article Saved"
     }
 
     private suspend fun deleteArticle(article: Article) {
         newsUsecases.deleteArticle(article)
-        _sideEffect.value = "Article Deleted"
+        sideEffect = "Article Deleted"
     }
 }
