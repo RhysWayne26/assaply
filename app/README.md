@@ -1,6 +1,13 @@
-Проект построен на основе MVVM (Model-View-ViewModel) с использованием Jetpack Compose, Hilt, Room, Paging 3, и Retrofit. Приложение отображает новостную ленту с возможностью поиска и сохранения статей.
+# News App (MVVM, Jetpack Compose, Hilt, Room, Paging 3, Retrofit)
 
-**Пакеты и слои**
+Приложение для отображения новостной ленты с возможностью поиска и сохранения статей.  
+Архитектура построена на **MVVM** с разделением на слои **UI – Domain – Data**.
+
+---
+
+## Архитектура и структура пакетов
+
+```
 ├── api/              # Работа с удалённым API (NewsAPI)
 ├── room/             # База данных Room и DAO
 ├── repository/       # Репозиторий, соединяющий Room и API
@@ -11,43 +18,69 @@
 │   └── navigation/   # Навигация
 ├── util/             # Вспомогательные классы (Constants, Preferences)
 └── di/               # DI-модуль (AppModule)
+```
 
+---
 
-**Data Flow и слои**
+## Data Flow
 
-1)UI Layer (Compose):
-Использует ViewModel, получающий State через StateFlow.
+### 1. **UI Layer (Compose)**
+- Построен на **Jetpack Compose**  
+- Работает с **ViewModel**, который отдает состояние через `StateFlow`
 
-2)Domain Layer:
-Все бизнес-операции инкапсулированы в NewsUsecases, который содержит методы getNews, searchNews, upsertArticle, getSavedArticles и др.
+### 2. **Domain Layer**
+- Содержит **use cases** в `NewsUsecases`
+- Основные операции:
+  - `getNews`
+  - `searchNews`
+  - `upsertArticle`
+  - `getSavedArticles`
 
-3)Data Layer:
-NewsRepositoryImplementation предоставляет данные из Remote API и Room, используя PagingSource.
+### 3. **Data Layer**
+- `NewsRepositoryImplementation` соединяет **Remote API** и **Room**
+- Использует **PagingSource** для постраничной загрузки
 
-4)Remote Layer:
-Retrofit + Paging 3, источник данных: NewsAPI.org.
+### 4. **Remote Layer**
+- Источник данных: **NewsAPI.org**
+- **Retrofit + Paging 3**
 
-5)Local Layer:
-Room, таблица Article, хранит избранные статьи 
-Статьи сохраняются при нажатии на bookmark (в DetailsScreen).
-Используются @Insert(onConflict = REPLACE), @Delete, @Query.
+### 5. **Local Layer**
+- **Room**, таблица `Article`
+- Операции:
+  - `@Insert(onConflict = REPLACE)`
+  - `@Delete`
+  - `@Query`
+- Сохранение статей при нажатии на **Bookmark** в `DetailsScreen`
 
+---
 
-**Поиск**
+## Поиск
 
-Поиск работает через API everything NewsAPI
-Параметры: q, sources, page, apiKey
-Поиск идет title, description, content
+- Работает через `everything` эндпоинт NewsAPI  
+- Параметры:
+  - `q` (ключевое слово)
+  - `sources`
+  - `page`
+  - `apiKey`
+- Поиск идет по: `title`, `description`, `content`
 
-**Dependency Injection (Hilt)**
+---
 
-DI настраивается в AppModule.kt:
-Биндятся: UserPreferences, Room, Retrofit, NewsRepository, NewsUsecases
-Все ViewModel получают зависимости через @HiltViewModel
+## Dependency Injection (Hilt)
 
-**Навигация**
+В `AppModule.kt` настраивается DI:  
+- `UserPreferences`  
+- `Room`  
+- `Retrofit`  
+- `NewsRepository`  
+- `NewsUsecases`  
 
-Используется NavHost, NavController
-savedStateHandle передаёт Article между экранами
-Экран DetailsScreen работает с savedStateHandle["article"]
+Все `ViewModel` получают зависимости через `@HiltViewModel`.
 
+---
+
+## Навигация
+
+- Реализована через `NavHost` и `NavController`  
+- Для передачи данных между экранами используется `savedStateHandle`  
+- В `DetailsScreen` принимается `article` через `savedStateHandle["article"]`
